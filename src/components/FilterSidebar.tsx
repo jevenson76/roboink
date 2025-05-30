@@ -15,7 +15,7 @@ const FilterSidebar: React.FC = () => {
   } = useFilter();
 
   return (
-    <div className="sticky top-36 left-0 w-64 h-[calc(100vh-9rem)] bg-white border-2 border-navy rounded-lg shadow-xl overflow-hidden z-40">
+    <div className="sticky top-36 w-64 h-[calc(100vh-9rem)] bg-white border-2 border-navy rounded-lg shadow-xl overflow-hidden z-40">
       <div className="h-full overflow-y-auto p-6">
         <h3 className="text-xl font-slab font-bold text-navy mb-6">Filters</h3>
         

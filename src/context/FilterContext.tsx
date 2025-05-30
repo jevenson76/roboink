@@ -47,8 +47,8 @@ export const FilterProvider: React.FC<{ children: ReactNode }> = ({ children }) 
       params.append('type', type);
     });
     
-    navigate(`/collections?${params.toString()}`, { replace: true });
-  }, [selectedCategories, selectedProductTypes, navigate]);
+    navigate(`${location.pathname}?${params.toString()}`, { replace: true });
+  }, [selectedCategories, selectedProductTypes, navigate, location.pathname]);
 
   const toggleCategory = (categoryId: string) => {
     setSelectedCategories(prev => {
