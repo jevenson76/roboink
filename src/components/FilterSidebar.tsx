@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { ChevronDown } from 'lucide-react';
 import { useFilter } from '../context/FilterContext';
 import { categories } from '../data/categories';
@@ -10,9 +9,9 @@ const FilterSidebar: React.FC = () => {
     selectedCategories,
     selectedProductTypes,
     expandedProductTypes,
-    setExpandedProductTypes,
     toggleCategory,
     toggleProductType,
+    toggleProductTypeExpansion,
   } = useFilter();
 
   return (
@@ -25,8 +24,8 @@ const FilterSidebar: React.FC = () => {
           <h4 className="font-slab font-semibold text-navy mb-4">Product Types</h4>
           {Object.entries(productTypes).map(([key, category]) => (
             <div key={key} className="mb-4">
-              <Link
-                to={`/collections/${key.replace(/([A-Z])/g, '-$1').toLowerCase().replace(/^-/, '')}`}
+              <button
+                onClick={() => toggleProductTypeExpansion(key)}
                 className="flex items-center justify-between w-full p-2 -mx-2 rounded hover:bg-navy/5 transition-colors duration-200 group"
               >
                 <span className="font-slab font-semibold text-navy group-hover:text-brass-gold transition-colors duration-200">
@@ -37,7 +36,7 @@ const FilterSidebar: React.FC = () => {
                     expandedProductTypes.includes(key) ? 'rotate-180' : ''
                   }`} 
                 />
-              </Link>
+              </button>
               
               {expandedProductTypes.includes(key) && (
                 <div className="ml-4 mt-2 space-y-2">

@@ -12,6 +12,7 @@ interface FilterContextType {
   setSortBy: (sort: string) => void;
   toggleCategory: (categoryId: string) => void;
   toggleProductType: (typeId: string) => void;
+  toggleProductTypeExpansion: (key: string) => void;
 }
 
 const FilterContext = createContext<FilterContextType | undefined>(undefined);
@@ -68,6 +69,15 @@ export const FilterProvider: React.FC<{ children: ReactNode }> = ({ children }) 
     });
   };
 
+  const toggleProductTypeExpansion = (key: string) => {
+    setExpandedProductTypes(prev => {
+      if (prev.includes(key)) {
+        return prev.filter(k => k !== key);
+      }
+      return [...prev, key];
+    });
+  };
+
   return (
     <FilterContext.Provider
       value={{
@@ -81,6 +91,7 @@ export const FilterProvider: React.FC<{ children: ReactNode }> = ({ children }) 
         setSortBy,
         toggleCategory,
         toggleProductType,
+        toggleProductTypeExpansion,
       }}
     >
       {children}
