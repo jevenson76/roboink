@@ -4,9 +4,11 @@ import NavbarPRD from '../components/NavbarPRD';
 import FooterPRD from '../components/FooterPRD';
 import ProductCardPRD from '../components/ProductCardPRD';
 import OrnamentalDivider from '../components/OrnamentalDivider';
+import FilterSidebar from '../components/FilterSidebar';
+import { useFilter } from '../context/FilterContext';
 import { products } from '../data/products';
 import { productTypes } from '../data/productTypes';
-import { ChevronDown, ChevronRight, Home } from 'lucide-react';
+import { ChevronRight, Home } from 'lucide-react';
 
 interface CategoryMapping {
   [key: string]: {
@@ -26,9 +28,7 @@ const categoryMapping: CategoryMapping = {
 
 const CollectionCategoryPage: React.FC = () => {
   const { category } = useParams<{ category: string }>();
-  const [selectedProductTypes, setSelectedProductTypes] = useState<string[]>([]);
-  const [isFilterExpanded, setIsFilterExpanded] = useState(false);
-  const [sortBy, setSortBy] = useState('featured');
+  const { selectedProductTypes, sortBy, setSortBy } = useFilter();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -76,14 +76,6 @@ const CollectionCategoryPage: React.FC = () => {
       });
   }
 
-  const toggleProductType = (typeId: string) => {
-    if (selectedProductTypes.includes(typeId)) {
-      setSelectedProductTypes(selectedProductTypes.filter(t => t !== typeId));
-    } else {
-      setSelectedProductTypes([...selectedProductTypes, typeId]);
-    }
-  };
-
   return (
     <div className="min-h-screen bg-[#efece9] animate-fade-in-from-top">
       <NavbarPRD />
@@ -114,39 +106,10 @@ const CollectionCategoryPage: React.FC = () => {
         </nav>
       </div>
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-          {/* Sidebar Filters */}
-          <div className="lg:col-span-1">
-            <div className="bg-white border-2 border-navy rounded-lg p-6">
-              <button
-                onClick={() => setIsFilterExpanded(!isFilterExpanded)}
-                className="flex items-center justify-between w-full text-left font-semibold text-navy mb-4"
-              >
-                <h3 className="text-lg">Product Types</h3>
-                <ChevronDown className={`w-5 h-5 transition-transform ${isFilterExpanded ? 'rotate-180' : ''}`} />
-              </button>
-              
-              {isFilterExpanded && (
-                <div className="space-y-3">
-                  {categoryProductTypes.items.map((type) => (
-                    <label key={type.id} className="flex items-center cursor-pointer">
-                      <input
-                        type="checkbox"
-                        checked={selectedProductTypes.includes(type.id)}
-                        onChange={() => toggleProductType(type.id)}
-                        className="mr-3 text-navy rounded"
-                      />
-                      <span className="text-navy/80">{type.name}</span>
-                    </label>
-                  ))}
-                </div>
-              )}
-            </div>
-          </div>
+      <FilterSidebar />
 
-          {/* Products Section */}
-          <div className="lg:col-span-3">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 ml-80">
+        <div className="w-full">
             {/* Sort Bar */}
             <div className="flex flex-wrap items-center justify-between mb-8 pb-6 border-b border-navy/20">
               <p className="text-navy/60 font-semibold">
@@ -180,7 +143,6 @@ const CollectionCategoryPage: React.FC = () => {
                 <p className="text-navy/60 text-lg">No products found in this category.</p>
               </div>
             )}
-          </div>
         </div>
       </main>
 

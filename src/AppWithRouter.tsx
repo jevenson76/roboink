@@ -17,13 +17,15 @@ import CarePage from './pages/CarePage';
 import CustomRequestsPage from './pages/CustomRequestsPage';
 import ScrollToTop from './components/ScrollToTop';
 import { CartProvider } from './context/CartContext';
+import { FilterProvider } from './context/FilterContext';
 
 function AppWithRouter() {
   return (
     <Router>
       <CartProvider>
-        <ScrollToTop />
-        <Routes>
+        <FilterProvider>
+          <ScrollToTop />
+          <Routes>
           <Route path="/" element={<AppPRD />} />
           <Route path="/product/:id" element={<ProductDetailPage />} />
           <Route path="/collections" element={<CollectionsPage />} />
@@ -40,6 +42,7 @@ function AppWithRouter() {
           <Route path="/care" element={<CarePage />} />
           <Route path="/custom-requests" element={<CustomRequestsPage />} />
         </Routes>
+        </FilterProvider>
       </CartProvider>
     </Router>
   );

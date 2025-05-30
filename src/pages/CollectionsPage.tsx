@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { useSearchParams, Link } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import NavbarPRD from '../components/NavbarPRD';
 import FooterPRD from '../components/FooterPRD';
 import ProductCardPRD from '../components/ProductCardPRD';
 import OrnamentalDivider from '../components/OrnamentalDivider';
+import FilterSidebar from '../components/FilterSidebar';
+import { useFilter } from '../context/FilterContext';
 import { products } from '../data/products';
 import { categories } from '../data/categories';
 import { productTypes } from '../data/productTypes';
-import { ChevronDown } from 'lucide-react';
 
 const CollectionsPage: React.FC = () => {
   useEffect(() => {
@@ -19,10 +20,16 @@ const CollectionsPage: React.FC = () => {
   const searchQuery = searchParams.get('search');
   const productTypeFromUrl = searchParams.get('productType');
   const typeFromUrl = searchParams.get('type'); // For product type categories
-  const [selectedCategories, setSelectedCategories] = useState<string[]>(categoryFromUrl ? [categoryFromUrl] : []);
-  const [selectedProductTypes, setSelectedProductTypes] = useState<string[]>(productTypeFromUrl ? [productTypeFromUrl] : []);
-  const [expandedProductTypes, setExpandedProductTypes] = useState<string[]>([]);
-  const [sortBy, setSortBy] = useState('featured');
+  
+  const {
+    selectedCategories,
+    setSelectedCategories,
+    selectedProductTypes,
+    setSelectedProductTypes,
+    sortBy,
+    setSortBy,
+  } = useFilter();
+  
   const [displayedProducts, setDisplayedProducts] = useState(24); // Show 24 products initially
   const PRODUCTS_PER_PAGE = 24;
 
@@ -38,7 +45,7 @@ const CollectionsPage: React.FC = () => {
       const typeItems = productTypes[typeFromUrl].items.map(item => item.id);
       setSelectedProductTypes(typeItems);
     }
-  }, [categoryFromUrl, productTypeFromUrl, typeFromUrl]);
+  }, [categoryFromUrl, productTypeFromUrl, typeFromUrl, setSelectedCategories, setSelectedProductTypes]);
 
   // Reset displayed products when filters change
   useEffect(() => {
@@ -136,94 +143,10 @@ const CollectionsPage: React.FC = () => {
         </p>
       </section>
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-          {/* Filters Sidebar */}
-          <div className="lg:col-span-1">
-            <div className="bg-white border-2 border-navy rounded-lg p-6 sticky top-24 max-h-[calc(100vh-8rem)] overflow-y-auto">
-              <h3 className="text-xl font-slab font-bold text-navy mb-6">Filters</h3>
-              
-              {/* Design Categories */}
-              <div className="mb-8">
-                <h4 className="font-semibold text-navy mb-4">Design Categories</h4>
-                <div className="space-y-2">
-                  {['robots', 'vehicles', 'clockwork-creatures', 'gadgetry-gizmos', 'typographic-treasures', 'victorian-vanguard', 'retro-futurism', 'skulls', 'custom-requests'].map((cat) => (
-                    <label key={cat} className="flex items-center cursor-pointer">
-                      <input
-                        type="checkbox"
-                        value={cat}
-                        checked={selectedCategories.includes(cat)}
-                        onChange={(e) => {
-                          if (e.target.checked) {
-                            setSelectedCategories([...selectedCategories, cat]);
-                          } else {
-                            setSelectedCategories(selectedCategories.filter(c => c !== cat));
-                          }
-                        }}
-                        className="mr-3 text-navy rounded"
-                      />
-                      <span className="text-navy/80">
-                        {cat.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
-                      </span>
-                    </label>
-                  ))}
-                </div>
-              </div>
-              
-              {/* Product Types */}
-              <div>
-                {Object.entries(productTypes).map(([key, category]) => (
-                  <div key={key} className="mb-4">
-                    <div className="flex items-center justify-between w-full mb-2">
-                      <Link 
-                        to={`/collections/${key.replace(/([A-Z])/g, '-$1').toLowerCase().replace(/^-/, '')}`}
-                        className="font-semibold text-navy hover:text-navy/80 underline flex-grow"
-                      >
-                        {category.name}
-                      </Link>
-                      <button
-                        onClick={() => {
-                          if (expandedProductTypes.includes(key)) {
-                            setExpandedProductTypes(expandedProductTypes.filter(k => k !== key));
-                          } else {
-                            setExpandedProductTypes([...expandedProductTypes, key]);
-                          }
-                        }}
-                        className="ml-2 p-1"
-                      >
-                        <ChevronDown className={`w-4 h-4 transition-transform ${expandedProductTypes.includes(key) ? 'rotate-180' : ''}`} />
-                      </button>
-                    </div>
-                    {expandedProductTypes.includes(key) && (
-                      <div className="space-y-2 ml-4">
-                        {category.items.map((item) => (
-                          <label key={item.id} className="flex items-center cursor-pointer">
-                            <input
-                              type="checkbox"
-                              value={item.id}
-                              checked={selectedProductTypes.includes(item.id)}
-                              onChange={(e) => {
-                                if (e.target.checked) {
-                                  setSelectedProductTypes([...selectedProductTypes, item.id]);
-                                } else {
-                                  setSelectedProductTypes(selectedProductTypes.filter(t => t !== item.id));
-                                }
-                              }}
-                              className="mr-3 text-navy rounded"
-                            />
-                            <span className="text-navy/80 text-sm">{item.name}</span>
-                          </label>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Products Section */}
-          <div className="lg:col-span-3">
+      <FilterSidebar />
+      
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 ml-80">
+        <div className="w-full">
             {/* Sort Bar */}
             <div className="flex flex-wrap items-center justify-between mb-8 pb-6 border-b border-navy/20">
               <p className="text-navy/60 font-semibold">
@@ -330,7 +253,6 @@ const CollectionsPage: React.FC = () => {
                 </button>
               </div>
             )}
-          </div>
         </div>
       </main>
 

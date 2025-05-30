@@ -3,9 +3,12 @@ import { Link } from 'react-router-dom';
 import { ShoppingCart, Menu, X } from 'lucide-react';
 import logo from '../assets/Logo.png';
 import SteampunkNavButton from './SteampunkNavButton';
+import { useCart } from '../context/CartContext';
 
 const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { items } = useCart();
+  const cartItemCount = items.reduce((total, item) => total + item.quantity, 0);
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-brass-gold via-copper to-brass-gold border-b-4 border-warm-brown shadow-2xl backdrop-blur-sm">
@@ -58,9 +61,11 @@ const Navbar: React.FC = () => {
             className="relative group text-deep-navy hover:text-warm-brown p-3 transition-all duration-300"
           >
             <ShoppingCart className="w-8 h-8 group-hover:animate-pulse" />
-            <span className="absolute -top-1 -right-1 inline-flex items-center justify-center px-2.5 py-1 text-sm font-bold text-creamy-ivory bg-gradient-to-r from-warm-brown to-brass-gold rounded-full shadow-gear animate-pulse-slow">
-              3
-            </span>
+            {cartItemCount > 0 && (
+              <span className="absolute -top-1 -right-1 inline-flex items-center justify-center px-2.5 py-1 text-sm font-bold text-creamy-ivory bg-gradient-to-r from-warm-brown to-brass-gold rounded-full shadow-gear animate-pulse-slow">
+                {cartItemCount}
+              </span>
+            )}
           </Link>
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -91,7 +96,7 @@ const Navbar: React.FC = () => {
               className="block px-4 py-4 text-2xl lg:text-3xl text-deep-navy hover:text-copper hover:text-3xl lg:hover:text-4xl hover:font-bold transition-all duration-300"
               onClick={() => setIsMenuOpen(false)}
             >
-              Collection
+              Collections
             </Link>
             <Link
               to="/about"

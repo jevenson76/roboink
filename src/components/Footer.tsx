@@ -26,13 +26,13 @@ const Footer: React.FC = () => {
               Where Victorian Engineering Meets AI Design. Timeless style, machine-made.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="text-brass-gold hover:text-creamy-ivory transition-colors duration-300">
+              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-brass-gold hover:text-creamy-ivory transition-colors duration-300">
                 <Facebook className="h-5 w-5" />
               </a>
-              <a href="#" className="text-brass-gold hover:text-creamy-ivory transition-colors duration-300">
+              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-brass-gold hover:text-creamy-ivory transition-colors duration-300">
                 <Twitter className="h-5 w-5" />
               </a>
-              <a href="#" className="text-brass-gold hover:text-creamy-ivory transition-colors duration-300">
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-brass-gold hover:text-creamy-ivory transition-colors duration-300">
                 <Instagram className="h-5 w-5" />
               </a>
             </div>
@@ -65,13 +65,19 @@ const Footer: React.FC = () => {
                 <Link to="/faq" className="text-creamy-ivory/60 hover:text-brass-gold transition-colors duration-300">FAQ</Link>
               </li>
               <li>
-                <Link to="/faq" className="text-creamy-ivory/60 hover:text-brass-gold transition-colors duration-300">Shipping & Returns</Link>
+                <Link to="/shipping" className="text-creamy-ivory/60 hover:text-brass-gold transition-colors duration-300">Shipping & Returns</Link>
               </li>
               <li>
-                <a href="#" className="text-creamy-ivory/60 hover:text-brass-gold transition-colors duration-300">Privacy Policy</a>
+                <Link to="/privacy" className="text-creamy-ivory/60 hover:text-brass-gold transition-colors duration-300">Privacy Policy</Link>
               </li>
               <li>
-                <a href="#" className="text-creamy-ivory/60 hover:text-brass-gold transition-colors duration-300">Terms & Conditions</a>
+                <Link to="/terms" className="text-creamy-ivory/60 hover:text-brass-gold transition-colors duration-300">Terms & Conditions</Link>
+              </li>
+              <li>
+                <Link to="/care" className="text-creamy-ivory/60 hover:text-brass-gold transition-colors duration-300">Care Instructions</Link>
+              </li>
+              <li>
+                <Link to="/custom-requests" className="text-creamy-ivory/60 hover:text-brass-gold transition-colors duration-300">Custom Requests</Link>
               </li>
             </ul>
           </div>
@@ -102,15 +108,15 @@ const Footer: React.FC = () => {
             &copy; {new Date().getFullYear()} RoboInkTees. All rights reserved.
           </p>
           <div className="flex space-x-6">
-            <a href="#" className="text-creamy-ivory/60 hover:text-brass-gold text-sm transition-colors duration-300">
+            <Link to="/privacy" className="text-creamy-ivory/60 hover:text-brass-gold text-sm transition-colors duration-300">
               Privacy Policy
-            </a>
-            <a href="#" className="text-creamy-ivory/60 hover:text-brass-gold text-sm transition-colors duration-300">
+            </Link>
+            <Link to="/terms" className="text-creamy-ivory/60 hover:text-brass-gold text-sm transition-colors duration-300">
               Terms of Service
-            </a>
-            <a href="#" className="text-creamy-ivory/60 hover:text-brass-gold text-sm transition-colors duration-300">
-              Cookie Policy
-            </a>
+            </Link>
+            <Link to="/size-guide" className="text-creamy-ivory/60 hover:text-brass-gold text-sm transition-colors duration-300">
+              Size Guide
+            </Link>
           </div>
         </div>
       </div>

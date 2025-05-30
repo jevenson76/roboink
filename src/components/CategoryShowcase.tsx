@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { categories } from '../data/categories';
 import BrassButton from './BrassButton';
 
 const CategoryShowcase: React.FC = () => {
   const [customText, setCustomText] = useState('');
+  const navigate = useNavigate();
 
   return (
     <div className="bg-deep-navy py-16">
@@ -56,8 +58,7 @@ const CategoryShowcase: React.FC = () => {
                   />
                   <BrassButton 
                     onClick={() => {
-                      // Handle custom request
-                      console.log('Custom request:', customText);
+                      navigate('/custom-requests');
                     }}
                     className="w-full"
                   >
@@ -67,7 +68,7 @@ const CategoryShowcase: React.FC = () => {
               ) : (
                 <BrassButton 
                   onClick={() => {
-                    // TODO: Navigate to category page
+                    navigate(`/collections?category=${category.id}`);
                   }}
                   variant="secondary"
                   className="w-full"
