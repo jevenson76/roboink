@@ -10,10 +10,8 @@ import { useCart } from '../context/CartContext';
 const NavbarPRD: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
-  const [activeSubDropdown, setActiveSubDropdown] = useState<string | null>(null);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [dropdownTimeout, setDropdownTimeout] = useState<NodeJS.Timeout | null>(null);
-  const [subDropdownTimeout, setSubDropdownTimeout] = useState<NodeJS.Timeout | null>(null);
   const { cartCount } = useCart();
 
   return (
@@ -60,10 +58,7 @@ const NavbarPRD: React.FC = () => {
                   setActiveDropdown('productTypes');
                 }}
                 onMouseLeave={() => {
-                  const timeout = setTimeout(() => {
-                    setActiveDropdown(null);
-                    setActiveSubDropdown(null);
-                  }, 300);
+                  const timeout = setTimeout(() => setActiveDropdown(null), 300);
                   setDropdownTimeout(timeout);
                 }}
               >

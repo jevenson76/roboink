@@ -15,7 +15,7 @@ const FilterSidebar: React.FC = () => {
   } = useFilter();
 
   return (
-    <div className="w-64 bg-white border-2 border-navy rounded-lg shadow-xl overflow-hidden">
+    <div className="w-64 bg-white border-2 border-navy rounded-lg shadow-xl overflow-hidden flex-shrink-0">
       <div className="p-6">
         <h3 className="text-xl font-slab font-bold text-navy mb-6">Filters</h3>
         
