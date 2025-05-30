@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { ChevronDown } from 'lucide-react';
 import { useFilter } from '../context/FilterContext';
 import { categories } from '../data/categories';
@@ -15,8 +16,8 @@ const FilterSidebar: React.FC = () => {
   } = useFilter();
 
   return (
-    <div className="sticky top-36 w-64 h-[calc(100vh-9rem)] bg-white border-2 border-navy rounded-lg shadow-xl overflow-hidden z-40">
-      <div className="h-full overflow-y-auto p-6">
+    <div className="w-64 bg-white border-2 border-navy rounded-lg shadow-xl overflow-hidden">
+      <div className="p-6">
         <h3 className="text-xl font-slab font-bold text-navy mb-6">Filters</h3>
         
         {/* Product Types */}
@@ -24,14 +25,8 @@ const FilterSidebar: React.FC = () => {
           <h4 className="font-slab font-semibold text-navy mb-4">Product Types</h4>
           {Object.entries(productTypes).map(([key, category]) => (
             <div key={key} className="mb-4">
-              <button
-                onClick={() => {
-                  if (expandedProductTypes.includes(key)) {
-                    setExpandedProductTypes(expandedProductTypes.filter(k => k !== key));
-                  } else {
-                    setExpandedProductTypes([...expandedProductTypes, key]);
-                  }
-                }}
+              <Link
+                to={`/collections/${key.replace(/([A-Z])/g, '-$1').toLowerCase().replace(/^-/, '')}`}
                 className="flex items-center justify-between w-full p-2 -mx-2 rounded hover:bg-navy/5 transition-colors duration-200 group"
               >
                 <span className="font-slab font-semibold text-navy group-hover:text-brass-gold transition-colors duration-200">
@@ -42,7 +37,7 @@ const FilterSidebar: React.FC = () => {
                     expandedProductTypes.includes(key) ? 'rotate-180' : ''
                   }`} 
                 />
-              </button>
+              </Link>
               
               {expandedProductTypes.includes(key) && (
                 <div className="ml-4 mt-2 space-y-2">
