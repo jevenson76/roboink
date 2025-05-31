@@ -90,61 +90,45 @@ const CollectionCategoryPage: React.FC = () => {
         </p>
       </section>
 
-      {/* Breadcrumb */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-        <nav className="flex items-center text-sm text-navy/60">
-          <Link to="/" className="hover:text-navy flex items-center">
-            <Home className="w-4 h-4 mr-1" />
-            Home
-          </Link>
-          <ChevronRight className="w-4 h-4 mx-2" />
-          <Link to="/collections" className="hover:text-navy">
-            Collections
-          </Link>
-          <ChevronRight className="w-4 h-4 mx-2" />
-          <span className="text-navy font-semibold">{categoryInfo.name}</span>
-        </nav>
-      </div>
-
-      <FilterSidebar />
-
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 ml-80">
-        <div className="w-full">
-            {/* Sort Bar */}
-            <div className="flex flex-wrap items-center justify-between mb-8 pb-6 border-b border-navy/20">
-              <p className="text-navy/60 font-semibold">
-                {filteredProducts.length} {filteredProducts.length === 1 ? 'Item' : 'Items'}
-              </p>
-              
-              <div className="flex items-center space-x-4">
-                <span className="text-navy font-semibold">Sort by:</span>
-                <select
-                  value={sortBy}
-                  onChange={(e) => setSortBy(e.target.value)}
-                  className="border border-navy/30 rounded px-3 py-1 text-navy focus:outline-none focus:border-navy"
-                >
-                  <option value="featured">Featured</option>
-                  <option value="price-low">Price: Low to High</option>
-                  <option value="price-high">Price: High to Low</option>
-                  <option value="rating">Top Rated</option>
-                </select>
-              </div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex gap-8">
+        <FilterSidebar />
+        
+        <main className="flex-1">
+          {/* Sort Bar */}
+          <div className="flex flex-wrap items-center justify-between mb-8 pb-6 border-b border-navy/20">
+            <p className="text-navy/60 font-semibold">
+              {filteredProducts.length} {filteredProducts.length === 1 ? 'Item' : 'Items'}
+            </p>
+            
+            <div className="flex items-center space-x-4">
+              <span className="text-navy font-semibold">Sort by:</span>
+              <select
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value)}
+                className="border border-navy/30 rounded px-3 py-1 text-navy focus:outline-none focus:border-navy"
+              >
+                <option value="featured">Featured</option>
+                <option value="price-low">Price: Low to High</option>
+                <option value="price-high">Price: High to Low</option>
+                <option value="rating">Top Rated</option>
+              </select>
             </div>
+          </div>
 
-            {/* Products Grid */}
-            {filteredProducts.length > 0 ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {filteredProducts.map(product => (
-                  <ProductCardPRD key={product.id} {...product} />
-                ))}
-              </div>
-            ) : (
-              <div className="text-center py-12">
-                <p className="text-navy/60 text-lg">No products found in this category.</p>
-              </div>
-            )}
-        </div>
-      </main>
+          {/* Products Grid */}
+          {filteredProducts.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {filteredProducts.map(product => (
+                <ProductCardPRD key={product.id} {...product} />
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-12">
+              <p className="text-navy/60 text-lg">No products found in this category.</p>
+            </div>
+          )}
+        </main>
+      </div>
 
       <OrnamentalDivider className="mb-12 mt-12" bgColor="bg-[#efece9]" />
       <div className="h-1 bg-navy"></div>
