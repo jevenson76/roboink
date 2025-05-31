@@ -9,6 +9,7 @@ import { useFilter } from '../context/FilterContext';
 import { products } from '../data/products';
 import { categories } from '../data/categories';
 import { productTypes } from '../data/productTypes';
+import { Filter } from 'lucide-react';
 
 const CollectionsPage: React.FC = () => {
   useEffect(() => {
@@ -19,7 +20,8 @@ const CollectionsPage: React.FC = () => {
   const categoryFromUrl = searchParams.get('category');
   const searchQuery = searchParams.get('search');
   const productTypeFromUrl = searchParams.get('productType');
-  const typeFromUrl = searchParams.get('type'); // For product type categories
+  const typeFromUrl = searchParams.get('type');
+  const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false); // For product type categories
   
   const {
     selectedCategories,
@@ -99,6 +101,8 @@ const CollectionsPage: React.FC = () => {
       break;
   }
 
+  const activeFilterCount = selectedCategories.length + selectedProductTypes.length;
+
   return (
     <div className="min-h-screen bg-[#efece9] animate-fade-in-from-top">
       <NavbarPRD />
@@ -143,10 +147,27 @@ const CollectionsPage: React.FC = () => {
         </p>
       </section>
 
-      <FilterSidebar />
-      
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 ml-80">
-        <div className="w-full">
+      {/* Mobile Filter Button */}
+      <button
+        onClick={() => setIsMobileFilterOpen(true)}
+        className="lg:hidden fixed bottom-6 right-6 z-40 bg-gradient-to-r from-[#B8860B] to-[#DAA520] text-white p-4 rounded-full shadow-lg flex items-center space-x-2 hover:scale-110 transition-transform"
+      >
+        <Filter className="w-5 h-5" />
+        {activeFilterCount > 0 && (
+          <span className="bg-white text-[#B8860B] rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold">
+            {activeFilterCount}
+          </span>
+        )}
+      </button>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex gap-8">
+        <FilterSidebar 
+          totalProducts={filteredProducts.length}
+          isMobileOpen={isMobileFilterOpen}
+          onMobileClose={() => setIsMobileFilterOpen(false)}
+        />
+        
+        <main className="flex-1">
             {/* Sort Bar */}
             <div className="flex flex-wrap items-center justify-between mb-8 pb-6 border-b border-navy/20">
               <p className="text-navy/60 font-semibold">
@@ -161,7 +182,7 @@ const CollectionsPage: React.FC = () => {
                 <select
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value)}
-                  className="px-4 py-2 border-2 border-navy rounded-lg bg-[#efece9] text-navy focus:outline-none focus:ring-2 focus:ring-navy/20"
+                  className="px-4 py-2 border-2 border-navy rounded-lg bg-[#efece9] text-navy focus:outline-none focus:ring-2 focus:ring-[#B8860B] transition-all"
                 >
                   <option value="featured">Featured</option>
                   <option value="price-low">Price: Low to High</option>
@@ -253,8 +274,8 @@ const CollectionsPage: React.FC = () => {
                 </button>
               </div>
             )}
-        </div>
-      </main>
+        </main>
+      </div>
 
       <OrnamentalDivider className="mb-12 mt-12" bgColor="bg-[#efece9]" />
       <div className="h-1 bg-navy"></div>

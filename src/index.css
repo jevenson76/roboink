@@ -137,3 +137,134 @@
     transform: scale(0.95);
   }
 }
+
+/* Custom Scrollbar for Filter Sidebar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(26, 38, 52, 0.1);
+  border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #B8860B;
+  border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #DAA520;
+}
+
+/* Firefox scrollbar */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #B8860B rgba(26, 38, 52, 0.1);
+}
+
+/* Filter checkbox custom styling */
+input[type="checkbox"]:checked {
+  background-color: #B8860B;
+  border-color: #B8860B;
+}
+
+input[type="checkbox"]:checked:hover {
+  background-color: #DAA520;
+  border-color: #DAA520;
+}
+
+input[type="checkbox"]:focus {
+  --tw-ring-color: #B8860B;
+}
+
+/* Smooth transitions for filter animations */
+.filter-transition {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Mobile filter drawer animation */
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+.slide-in {
+  animation: slideIn 0.3s ease-out forwards;
+}
+
+.slide-out {
+  animation: slideOut 0.3s ease-in forwards;
+}
+
+/* Filter badge pulse animation */
+@keyframes filterPulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.filter-badge-pulse {
+  animation: filterPulse 2s infinite;
+}
+
+/* Hover effects for filter items */
+.filter-item {
+  position: relative;
+  overflow: hidden;
+}
+
+.filter-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(184, 134, 11, 0.1), transparent);
+  transition: left 0.5s;
+}
+
+.filter-item:hover::before {
+  left: 100%;
+}
+
+/* Steampunk gear animation for loading states */
+@keyframes gearRotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.gear-rotate {
+  animation: gearRotate 4s linear infinite;
+}
+
+.gear-rotate-reverse {
+  animation: gearRotate 6s linear infinite reverse;
+}
