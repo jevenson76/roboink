@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import NavbarPRD from '../components/NavbarPRD';
+import RobustNavbar from '../components/RobustNavbar';
 import FooterPRD from '../components/FooterPRD';
 import OrnamentalDivider from '../components/OrnamentalDivider';
+import RippleButton from '../components/RippleButton';
 import { ShoppingCart, Plus, Minus } from 'lucide-react';
 import { products } from '../data/products';
 import { useCart } from '../context/CartContext';
@@ -59,7 +60,7 @@ const ProductDetailPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-[#efece9] animate-fade-in-from-top">
-      <NavbarPRD />
+      <RobustNavbar />
       
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -137,13 +138,15 @@ const ProductDetailPage: React.FC = () => {
             </div>
 
             {/* Add to Cart Button */}
-            <button 
+            <RippleButton
               onClick={handleAddToCart}
-              className="w-full py-4 bg-gradient-to-r from-[#B8860B] to-[#DAA520] text-parchment font-slab font-bold text-xl rounded-full hover:from-[#DAA520] hover:to-[#FFD700] transition-all duration-300 flex items-center justify-center space-x-3 shadow-lg"
+              variant="primary"
+              size="lg"
+              className="w-full flex items-center justify-center gap-3"
             >
               <ShoppingCart className="w-6 h-6" />
               <span>Add to Cart</span>
-            </button>
+            </RippleButton>
 
             {/* Features */}
             <div className="border-t border-navy/20 pt-6">

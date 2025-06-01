@@ -4,7 +4,11 @@ import { ShoppingBag, Package, Coffee, Home, Smartphone, Heart } from 'lucide-re
 import { products } from '../data/products';
 import { productTypes } from '../data/productTypes';
 
-const ProductTypesSection: React.FC = () => {
+interface ProductTypesSectionProps {
+  enableSteampunk?: boolean;
+}
+
+const ProductTypesSection: React.FC<ProductTypesSectionProps> = ({ enableSteampunk = false }) => {
   const categoryData = [
     {
       key: 'apparel',
@@ -69,7 +73,10 @@ const ProductTypesSection: React.FC = () => {
     <section className="py-16 bg-parchment">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-slab font-bold text-navy mb-4" style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.3)' }}>
+          <h2 className={enableSteampunk
+            ? "steampunk-heading steampunk-heading-lg text-center mb-4"
+            : "text-4xl md:text-5xl font-slab font-bold text-navy mb-4"
+          } style={enableSteampunk ? {} : { textShadow: '2px 2px 4px rgba(0, 0, 0, 0.3)' }}>
             Shop by Product Type
           </h2>
           <p className="text-lg text-[#800020] font-slab font-bold max-w-3xl mx-auto">

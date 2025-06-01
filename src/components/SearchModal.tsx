@@ -45,18 +45,18 @@ const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => {
       <div className="fixed inset-0 bg-black bg-opacity-50" onClick={onClose} />
       
       <div className="relative min-h-full flex items-start justify-center p-4 pt-20">
-        <div className="relative bg-parchment border-2 border-navy rounded-lg w-full max-w-3xl shadow-xl">
+        <div className="relative bg-parchment border-4 border-brass rounded-lg w-full max-w-3xl shadow-2xl">
           {/* Header */}
-          <div className="sticky top-0 bg-parchment border-b border-navy p-6 rounded-t-lg">
+          <div className="sticky top-0 bg-gradient-to-b from-parchment to-parchment/95 border-b-2 border-copper p-6 rounded-t-lg">
             <button
               onClick={onClose}
-              className="absolute top-4 right-4 p-2 text-navy hover:text-navy/80 transition-colors"
+              className="absolute top-4 right-4 p-2 text-brass hover:text-copper transition-colors"
             >
               <X className="w-6 h-6" />
             </button>
             
             <div className="flex items-center gap-3">
-              <Search className="w-6 h-6 text-navy" />
+              <Search className="w-6 h-6 text-brass" />
               <input
                 type="text"
                 placeholder="Search for robots, vehicles, skulls..."
@@ -68,7 +68,7 @@ const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => {
                     onClose();
                   }
                 }}
-                className="flex-1 text-xl font-slab bg-transparent border-none outline-none text-navy placeholder-navy/50"
+                className="flex-1 text-xl font-body bg-transparent border-none outline-none text-navy placeholder-navy/50 focus:placeholder-brass/50"
                 autoFocus
               />
             </div>
@@ -77,7 +77,7 @@ const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => {
           {/* Results */}
           <div className="p-6 max-h-[60vh] overflow-y-auto">
             {searchResults.length === 0 ? (
-              <p className="text-center text-navy/60 font-slab text-lg py-8">
+              <p className="text-center text-navy/60 font-body text-lg py-8">
                 No products found matching "{searchTerm}"
               </p>
             ) : (
@@ -87,17 +87,17 @@ const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => {
                     key={product.id}
                     to={`/product/${product.id}`}
                     onClick={onClose}
-                    className="flex gap-4 p-4 border border-navy/20 rounded-lg hover:bg-[#f2d19e] transition-colors"
+                    className="flex gap-4 p-4 border-2 border-brass/30 rounded-lg hover:bg-brass/10 hover:border-brass transition-all"
                   >
                     <img
                       src={product.image}
                       alt={product.title}
-                      className="w-24 h-24 object-cover rounded"
+                      className="w-24 h-24 object-cover rounded border-2 border-copper"
                     />
                     <div className="flex-1">
-                      <h3 className="font-slab font-bold text-navy mb-1">{product.title}</h3>
-                      <p className="text-sm text-navy/70 mb-2 line-clamp-2">{product.description}</p>
-                      <p className="font-slab font-bold text-[#B87333]">${product.price}</p>
+                      <h3 className="font-head font-bold text-navy mb-1">{product.title}</h3>
+                      <p className="text-sm text-navy/70 mb-2 line-clamp-2 font-body">{product.description}</p>
+                      <p className="font-head font-bold text-brass">${product.price}</p>
                     </div>
                   </Link>
                 ))}
@@ -107,11 +107,11 @@ const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => {
 
           {/* Footer */}
           {searchTerm && searchResults.length > 0 && (
-            <div className="border-t border-navy p-4 text-center">
+            <div className="border-t-2 border-copper p-4 text-center">
               <Link
                 to={`/collections?search=${encodeURIComponent(searchTerm)}`}
                 onClick={onClose}
-                className="text-navy font-slab font-semibold hover:underline"
+                className="text-brass font-head font-semibold hover:text-copper transition-colors"
               >
                 View all {searchResults.length} results →
               </Link>

@@ -4,17 +4,29 @@ export default {
   theme: {
     extend: {
       colors: {
-        // PRD Specified Colors
+        // Steampunk palette
+        brass: '#CD7F32',
+        copper: '#B87333',
+        
+        // Modern color scheme (kept for gradual migration)
+        primary: '#2C3E50',       // Deep navy
+        secondary: '#E67E22',     // Warm copper/orange
+        accent: '#9B59B6',        // Steampunk purple
+        light: '#ECF0F1',         // Light gray
+        dark: '#2C3E50',          // Text color
+        highlight: '#D35400',     // For CTAs
+        
+        // Legacy colors (for gradual migration)
         'parchment': '#F8F5F0',
         'navy': '#1A2634',
-        // Subtle Accent Colors
         'brass-gold': '#D4B483',
-        'copper': '#E7A977',
         'muted-teal': '#6DC6C4',
       },
       fontFamily: {
+        head: ['Rye', 'Georgia', 'serif'],
+        body: ['Scope One', 'Georgia', 'serif'],
+        'sans': ['Inter var', 'system-ui', 'sans-serif'],
         'slab': ['Roboto Slab', 'serif'],
-        'sans': ['Roboto', 'sans-serif'],
       },
       boxShadow: {
         'gear': '0 4px 6px -1px rgba(184, 115, 51, 0.3), 0 2px 4px -1px rgba(184, 115, 51, 0.2)',

@@ -1,4 +1,22 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;500;600;700;800;900&family=Roboto:wght@300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;500;600;700;800;900&display=swap');
+
+/* Sylpheed Font Face Declaration */
+@font-face {
+  font-family: 'Sylpheed';
+  src: url('/fonts/Sylpheed.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap; /* Improves loading performance */
+}
+
+@font-face {
+  font-family: 'Sylpheed';
+  src: url('/fonts/Sylpheed.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
 
 @tailwind base;
 @tailwind components;
@@ -12,16 +30,28 @@
 
 @layer base {
   html {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Inter var', system-ui, sans-serif;
     scroll-behavior: smooth;
-    background-color: var(--parchment);
-    color: var(--navy);
+    background-color: #ECF0F1;
+    color: #2C3E50;
+  }
+  
+  body {
+    @apply m-0 font-body text-gray-900 leading-normal;
+  }
+  
+  nav a, nav button {
+    @apply leading-none;
   }
   
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Roboto Slab', serif;
     font-weight: 700;
-    color: var(--navy);
+    color: #2C3E50;
+  }
+  
+  .font-slab {
+    font-family: 'Roboto Slab', serif;
   }
 }
 
@@ -114,8 +144,12 @@
     transform: translateX(-100%);
   }
   100% {
-    transform: translateX(100%);
+    transform: translateX(200%);
   }
+}
+
+.animate-shimmer {
+  animation: shimmer 1.5s ease-in-out;
 }
 
 @keyframes fadeInFromTop {
@@ -267,4 +301,1103 @@ input[type="checkbox"]:focus {
 
 .gear-rotate-reverse {
   animation: gearRotate 6s linear infinite reverse;
+}
+
+/* Enhanced Sub-Headers */
+.page-subheader {
+  font-family: 'Rye', 'Roboto Slab', serif;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
+  color: #800020;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  animation: fadeInScale 0.6s ease-out;
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.collection-subheader {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #800020;
+  font-family: 'Rye', 'Roboto Slab', serif;
+}
+
+.product-section-header {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  font-family: 'Rye', 'Roboto Slab', serif;
+}
+
+/* Hero Title with Multi-layer Effects */
+.hero-title-impact {
+  font-family: 'Cinzel Decorative', 'Playfair Display', serif;
+  font-size: clamp(3rem, 7vw, 6rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  line-height: 0.9;
+  position: relative;
+  background: linear-gradient(
+    135deg,
+    #B87333 0%,
+    #DAA520 20%,
+    #FFD700 40%,
+    #B8860B 60%,
+    #CD7F32 80%,
+    #B87333 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-size: 200% 200%;
+  animation: metallicSheen 8s ease-in-out infinite;
+  filter: 
+    drop-shadow(0 2px 2px rgba(0,0,0,0.5))
+    drop-shadow(0 4px 4px rgba(0,0,0,0.3))
+    drop-shadow(0 8px 8px rgba(0,0,0,0.2));
+}
+
+@keyframes metallicSheen {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.hero-subtitle-impact {
+  font-family: 'Roboto Slab', serif;
+  font-size: clamp(1.2rem, 2.5vw, 2rem);
+  font-style: italic;
+  color: #F8F5F0;
+  text-shadow: 
+    1px 1px 0 #B87333,
+    2px 2px 0 #B87333,
+    3px 3px 0 #B87333,
+    4px 4px 8px rgba(0,0,0,0.5);
+  letter-spacing: 0.1em;
+  margin-top: 1rem;
+  animation: subtitleFloat 4s ease-in-out infinite;
+}
+
+@keyframes subtitleFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.hero-gear-accent {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  opacity: 0.3;
+  animation: gearRotate 30s linear infinite;
+}
+
+.hero-gear-accent.top-left {
+  top: -20px;
+  left: -20px;
+  animation-direction: normal;
+}
+
+.hero-gear-accent.bottom-right {
+  bottom: -20px;
+  right: -20px;
+  animation-direction: reverse;
+}
+
+.hero-text-reveal {
+  animation: steamReveal 2s ease-out forwards;
+  animation-delay: 0.3s;
+  opacity: 0;
+}
+
+@keyframes steamReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+    filter: blur(10px);
+  }
+  50% {
+    filter: blur(5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+.victorian-divider {
+  width: 200px;
+  height: 2px;
+  margin: 2rem auto;
+  background: linear-gradient(
+    to right,
+    transparent,
+    #B87333 20%,
+    #DAA520 50%,
+    #B87333 80%,
+    transparent
+  );
+  position: relative;
+}
+
+.victorian-divider::before,
+.victorian-divider::after {
+  content: '❦';
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.5rem;
+  color: #B87333;
+}
+
+.victorian-divider::before {
+  left: -20px;
+}
+
+.victorian-divider::after {
+  right: -20px;
+}
+
+.hero-cta-steampunk {
+  position: relative;
+  padding: 1rem 3rem;
+  font-family: 'Roboto Slab', serif;
+  font-weight: 700;
+  font-size: 1.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  background: linear-gradient(135deg, #B8860B 0%, #DAA520 100%);
+  color: #F8F5F0;
+  border: 3px solid #B87333;
+  border-radius: 50px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 
+    0 4px 15px rgba(184, 134, 11, 0.3),
+    inset 0 -2px 10px rgba(0,0,0,0.2);
+}
+
+.hero-cta-steampunk::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle,
+    rgba(255,255,255,0.3) 0%,
+    transparent 70%
+  );
+  transform: rotate(45deg);
+  transition: all 0.5s ease;
+  opacity: 0;
+}
+
+.hero-cta-steampunk:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 6px 20px rgba(184, 134, 11, 0.4),
+    inset 0 -2px 10px rgba(0,0,0,0.2);
+}
+
+.hero-cta-steampunk:hover::before {
+  animation: ctaShine 0.5s ease-out;
+}
+
+@keyframes ctaShine {
+  0% {
+    opacity: 0;
+    transform: rotate(45deg) translateX(-100%);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: rotate(45deg) translateX(100%);
+  }
+}
+
+/* Navbar - Clean Flexbox Layout */
+
+/* Micro-Animations Library */
+
+/* Enhanced Navbar Dropdown Animation */
+.nav-dropdown {
+  transform-origin: top center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-dropdown-entering {
+  opacity: 0;
+  transform: scaleY(0.8) translateY(-10px);
+}
+
+.nav-dropdown-entered {
+  opacity: 1;
+  transform: scaleY(1) translateY(0);
+}
+
+/* 2. Card Hover Animations */
+.product-card-enhanced {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+
+.product-card-enhanced:hover {
+  transform: translateY(-4px);
+  box-shadow: 
+    0 20px 40px rgba(184, 134, 11, 0.2),
+    0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.product-card-enhanced .image-container {
+  overflow: hidden;
+  position: relative;
+}
+
+.product-card-enhanced:hover .product-image {
+  transform: scale(1.05);
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.price-tag {
+  transition: all 0.3s ease;
+}
+
+.product-card-enhanced:hover .price-tag {
+  animation: priceBounce 0.5s ease-out;
+}
+
+@keyframes priceBounce {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+/* 3. Button Micro-Interactions */
+.button-steampunk {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.button-steampunk::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.button-steampunk:active::after {
+  width: 300px;
+  height: 300px;
+}
+
+.button-with-gear {
+  padding-right: 3rem;
+}
+
+.button-with-gear::before {
+  content: '⚙';
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%) rotate(0deg);
+  transition: transform 0.5s ease;
+  font-size: 1.2rem;
+}
+
+.button-with-gear:hover::before {
+  transform: translateY(-50%) rotate(360deg);
+}
+
+/* 4. Loading States */
+.loading-gear {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  position: relative;
+}
+
+.loading-gear::before,
+.loading-gear::after {
+  content: '';
+  position: absolute;
+  border: 3px solid #B87333;
+  border-radius: 50%;
+  opacity: 0.6;
+}
+
+.loading-gear::before {
+  width: 100%;
+  height: 100%;
+  animation: gearSpin 2s linear infinite;
+  box-shadow: 0 0 20px rgba(205, 127, 50, 0.5);
+}
+
+.loading-gear::after {
+  width: 60%;
+  height: 60%;
+  top: 20%;
+  left: 20%;
+  animation: gearSpin 3s linear infinite reverse;
+  border-color: #CD7F32;
+}
+
+/* Enhanced Loading Animation with Steampunk Gears */
+.loading-steampunk {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.loading-steampunk .gear {
+  width: 30px;
+  height: 30px;
+  position: relative;
+  display: inline-block;
+}
+
+.loading-steampunk .gear::before {
+  content: '⚙';
+  position: absolute;
+  font-size: 30px;
+  color: #B87333;
+  animation: gearRotate 2s linear infinite;
+}
+
+.loading-steampunk .gear:nth-child(2)::before {
+  animation-duration: 3s;
+  animation-direction: reverse;
+  color: #CD7F32;
+}
+
+.loading-steampunk .gear:nth-child(3)::before {
+  animation-duration: 2.5s;
+  color: #B87333;
+}
+
+/* 5. Form Input Animations */
+.input-steampunk {
+  position: relative;
+  border: 2px solid transparent;
+  background-image: linear-gradient(white, white),
+                    linear-gradient(90deg, #B87333, #DAA520);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  transition: all 0.3s ease;
+}
+
+.input-steampunk:focus {
+  outline: none;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(184, 134, 11, 0.2);
+}
+
+.input-group {
+  position: relative;
+}
+
+.input-label {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: all 0.3s ease;
+  pointer-events: none;
+  color: #666;
+}
+
+.input-steampunk:focus + .input-label,
+.input-steampunk:not(:placeholder-shown) + .input-label {
+  top: -0.5rem;
+  left: 0.5rem;
+  font-size: 0.75rem;
+  background: white;
+  padding: 0 0.5rem;
+  color: #B87333;
+}
+
+/* 6. Scroll-triggered Animations */
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease-out;
+}
+
+.fade-in-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.stagger-item {
+  opacity: 0;
+  transform: translateX(-20px);
+  transition: all 0.4s ease-out;
+}
+
+.stagger-item.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.stagger-item:nth-child(1) { transition-delay: 0.1s; }
+.stagger-item:nth-child(2) { transition-delay: 0.2s; }
+.stagger-item:nth-child(3) { transition-delay: 0.3s; }
+.stagger-item:nth-child(4) { transition-delay: 0.4s; }
+
+/* 7. Toast Animations */
+.toast-steampunk {
+  animation: toastSlideIn 0.4s ease-out forwards;
+}
+
+@keyframes toastSlideIn {
+  from {
+    transform: translateX(100%) scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+  }
+}
+
+/* 8. Image Gallery */
+.gallery-item {
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.gallery-item:hover {
+  z-index: 10;
+  transform: scale(1.05) rotate(-1deg);
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.2),
+    0 0 0 2px #B87333;
+}
+
+/* 9. Dropdown Animations */
+.dropdown-steampunk {
+  transform-origin: top center;
+  animation: dropdownReveal 0.3s ease-out forwards;
+}
+
+@keyframes dropdownReveal {
+  from {
+    opacity: 0;
+    transform: scaleY(0.8) translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: scaleY(1) translateY(0);
+  }
+}
+
+/* 10. Cart Icon Animation */
+.cart-icon-bounce {
+  animation: cartBounce 0.4s ease-out;
+}
+
+@keyframes cartBounce {
+  0% { transform: scale(1) rotate(0deg); }
+  25% { transform: scale(1.2) rotate(-5deg); }
+  50% { transform: scale(0.9) rotate(5deg); }
+  75% { transform: scale(1.1) rotate(-2deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
+/* 11. Success Checkmark */
+.success-checkmark {
+  width: 50px;
+  height: 50px;
+  position: relative;
+}
+
+.success-checkmark::after {
+  content: '✓';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  font-size: 2rem;
+  color: #4CAF50;
+  animation: checkmarkPop 0.5s ease-out forwards;
+}
+
+@keyframes checkmarkPop {
+  0% { transform: translate(-50%, -50%) scale(0) rotate(0deg); }
+  50% { transform: translate(-50%, -50%) scale(1.3) rotate(10deg); }
+  100% { transform: translate(-50%, -50%) scale(1) rotate(0deg); }
+}
+
+/* 12. Page Transitions */
+.page-transition {
+  animation: pageSlide 0.5s ease-out;
+}
+
+@keyframes pageSlide {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Enhanced Product Card Animations */
+@keyframes float {
+  0% {
+    opacity: 0;
+    transform: translateY(0) scale(0.8);
+  }
+  50% {
+    opacity: 0.5;
+    transform: translateY(-50px) scale(1.2);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-100px) scale(1.5);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* AI Customization Tool Animations */
+@keyframes spin-reverse {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+.animate-spin-reverse {
+  animation: spin-reverse 12s linear infinite;
+}
+
+/* Ripple Button Animation */
+@keyframes ripple {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+.animate-ripple {
+  animation: ripple 600ms ease-out;
+}
+
+/* Fade In Animation */
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 300ms ease-out;
+}
+
+/* Accessibility: Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .animate-spin,
+  .animate-spin-slow,
+  .animate-spin-slow-reverse,
+  .animate-pulse-slow,
+  .animate-steam,
+  .animate-gear-spin,
+  .animate-gear-spin-reverse,
+  .animate-fade-in-from-top,
+  .animate-float,
+  .animate-spin-reverse,
+  .animate-ripple,
+  .loading-gear::before,
+  .loading-gear::after,
+  .loading-steampunk .gear::before {
+    animation: none !important;
+  }
+  
+  .nav-link-steampunk::before,
+  .nav-link-steampunk::after,
+  .product-card-enhanced,
+  .button-steampunk {
+    transition: none !important;
+  }
+}
+
+/* ========================================
+   ENHANCED STEAMPUNK DESIGN SYSTEM
+   ======================================== */
+
+/* 1. STEAMPUNK BACKGROUND STYLING */
+.steampunk-background {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  opacity: 0.03;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+.steampunk-background::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 0%,
+    rgba(248, 245, 240, 0.4) 40%,
+    rgba(248, 245, 240, 0.8) 100%
+  );
+}
+
+/* Textured overlay pattern */
+.steampunk-texture {
+  position: relative;
+}
+
+.steampunk-texture::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.015;
+  background-image: 
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 10px,
+      rgba(184, 134, 11, 0.1) 10px,
+      rgba(184, 134, 11, 0.1) 20px
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 10px,
+      rgba(205, 127, 50, 0.1) 10px,
+      rgba(205, 127, 50, 0.1) 20px
+    );
+  pointer-events: none;
+}
+
+/* 2. ENHANCED STEAMPUNK HEADINGS */
+.steampunk-heading {
+  font-family: 'Sylpheed', 'Cinzel Decorative', serif;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  line-height: 1.1;
+  position: relative;
+  
+  /* Metallic gradient text */
+  background: linear-gradient(
+    135deg,
+    #B87333 0%,
+    #DAA520 15%,
+    #FFD700 30%,
+    #B8860B 45%,
+    #CD7F32 60%,
+    #B87333 75%,
+    #8B4513 90%,
+    #B87333 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-size: 200% 200%;
+  animation: metallicShimmer 12s ease-in-out infinite;
+  
+  /* Multiple shadows for depth */
+  filter: 
+    drop-shadow(0 1px 1px rgba(0,0,0,0.8))
+    drop-shadow(0 2px 2px rgba(0,0,0,0.6))
+    drop-shadow(0 3px 3px rgba(0,0,0,0.4))
+    drop-shadow(0 4px 8px rgba(184,134,11,0.3))
+    drop-shadow(0 8px 16px rgba(0,0,0,0.2));
+}
+
+/* Responsive heading sizes */
+.steampunk-heading-xl {
+  font-size: clamp(3rem, 8vw, 6rem);
+  margin-bottom: 1.5rem;
+}
+
+.steampunk-heading-lg {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  margin-bottom: 1.25rem;
+}
+
+.steampunk-heading-md {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  margin-bottom: 1rem;
+}
+
+.steampunk-heading-sm {
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  margin-bottom: 0.75rem;
+}
+
+/* Victorian subtitle styling */
+.steampunk-subtitle {
+  font-family: 'Roboto Slab', serif;
+  font-style: italic;
+  color: #5a7a7a;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+  letter-spacing: 0.08em;
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
+}
+
+/* Enhanced metallic shimmer animation */
+@keyframes metallicShimmer {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  25% {
+    background-position: 100% 50%;
+  }
+  50% {
+    background-position: 0% 50%;
+  }
+  75% {
+    background-position: 100% 50%;
+  }
+}
+
+/* 3. PROMINENT GEAR DIVIDERS */
+.gear-divider-container {
+  position: relative;
+  height: 120px;
+  margin: 3rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .gear-divider-container {
+    height: 80px;
+    margin: 2rem 0;
+  }
+}
+
+/* Main gear divider component */
+.gear-divider {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* CSS Gear Implementation */
+.css-gear {
+  position: absolute;
+  width: var(--gear-size, 80px);
+  height: var(--gear-size, 80px);
+  background: linear-gradient(135deg, #B87333, #CD7F32);
+  border-radius: 50%;
+  box-shadow: 
+    inset 0 0 20px rgba(0,0,0,0.3),
+    0 0 40px rgba(184,134,11,0.2);
+  animation: gearRotate var(--rotation-speed, 20s) linear infinite;
+  opacity: 0;
+  animation-fill-mode: both;
+}
+
+/* Gear teeth using pseudo-elements */
+.css-gear::before,
+.css-gear::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: inherit;
+  border-radius: inherit;
+}
+
+.css-gear::before {
+  transform: rotate(45deg);
+}
+
+.css-gear::after {
+  transform: rotate(22.5deg);
+}
+
+/* Inner hole */
+.css-gear-inner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30%;
+  height: 30%;
+  background: var(--bg-color, #F8F5F0);
+  border-radius: 50%;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.2);
+}
+
+/* Multiple gear arrangement */
+.gear-divider .css-gear:nth-child(1) {
+  --gear-size: 100px;
+  --rotation-speed: 15s;
+  left: 50%;
+  transform: translateX(-50%);
+  animation-delay: 0s;
+  opacity: 0.3;
+}
+
+.gear-divider .css-gear:nth-child(2) {
+  --gear-size: 70px;
+  --rotation-speed: 20s;
+  left: 35%;
+  top: 10%;
+  animation-direction: reverse;
+  animation-delay: 0.2s;
+  opacity: 0.25;
+}
+
+.gear-divider .css-gear:nth-child(3) {
+  --gear-size: 60px;
+  --rotation-speed: 18s;
+  right: 30%;
+  bottom: 15%;
+  animation-delay: 0.4s;
+  opacity: 0.2;
+}
+
+.gear-divider .css-gear:nth-child(4) {
+  --gear-size: 50px;
+  --rotation-speed: 25s;
+  left: 20%;
+  bottom: 20%;
+  animation-direction: reverse;
+  animation-delay: 0.6s;
+  opacity: 0.15;
+}
+
+.gear-divider .css-gear:nth-child(5) {
+  --gear-size: 40px;
+  --rotation-speed: 22s;
+  right: 15%;
+  top: 20%;
+  animation-delay: 0.8s;
+  opacity: 0.15;
+}
+
+/* Fade in animation for gears */
+@keyframes gearFadeRotate {
+  0% {
+    opacity: 0;
+    transform: scale(0.8) rotate(0deg);
+  }
+  20% {
+    opacity: var(--gear-opacity, 0.3);
+  }
+  100% {
+    opacity: var(--gear-opacity, 0.3);
+    transform: scale(1) rotate(360deg);
+  }
+}
+
+/* Apply fade-in animation when in viewport */
+.gear-divider.in-view .css-gear {
+  animation-name: gearFadeRotate, gearRotate;
+  animation-duration: 2s, var(--rotation-speed, 20s);
+  animation-timing-function: ease-out, linear;
+  animation-iteration-count: 1, infinite;
+  animation-fill-mode: both, none;
+}
+
+/* Line through gears */
+.gear-divider::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    #B87333 15%,
+    #CD7F32 50%,
+    #B87333 85%,
+    transparent
+  );
+  transform: translateY(-50%);
+  z-index: -1;
+}
+
+/* 4. STEAMPUNK CONTAINER STYLES */
+.steampunk-container {
+  background: rgba(248, 245, 240, 0.95);
+  backdrop-filter: blur(10px);
+  border: 2px solid #B87333;
+  border-radius: 1rem;
+  box-shadow: 
+    0 8px 32px rgba(184, 134, 11, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.steampunk-container::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(
+    45deg,
+    #B87333,
+    #CD7F32,
+    #B87333
+  );
+  border-radius: inherit;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.steampunk-container:hover::before {
+  opacity: 0.3;
+}
+
+/* 5. STEAMPUNK BUTTON ENHANCEMENTS */
+.steampunk-button {
+  font-family: 'Sylpheed', 'Roboto Slab', serif;
+  position: relative;
+  padding: 1rem 2.5rem;
+  background: linear-gradient(135deg, #B8860B, #DAA520);
+  color: #F8F5F0;
+  border: 3px solid #B87333;
+  border-radius: 50px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 
+    0 4px 15px rgba(184, 134, 11, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.steampunk-button::before {
+  content: '⚙';
+  position: absolute;
+  font-size: 2rem;
+  opacity: 0.1;
+  top: 50%;
+  left: -2rem;
+  transform: translateY(-50%);
+  transition: all 0.5s ease;
+}
+
+.steampunk-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 6px 20px rgba(184, 134, 11, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -2px 10px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(135deg, #DAA520, #FFD700);
+}
+
+.steampunk-button:hover::before {
+  left: calc(100% - 2rem);
+  transform: translateY(-50%) rotate(180deg);
+}
+
+/* 6. UTILITY CLASSES */
+.steampunk-shadow-text {
+  text-shadow: 
+    1px 1px 0 #B87333,
+    2px 2px 0 #B87333,
+    3px 3px 0 #B87333,
+    4px 4px 0 #B87333,
+    5px 5px 10px rgba(0,0,0,0.5);
+}
+
+.steampunk-glow {
+  box-shadow: 
+    0 0 20px rgba(184, 134, 11, 0.5),
+    0 0 40px rgba(184, 134, 11, 0.3),
+    0 0 60px rgba(184, 134, 11, 0.1);
+}
+
+/* 7. MOBILE OPTIMIZATIONS */
+@media (max-width: 768px) {
+  .gear-divider-container {
+    margin: 1.5rem 0;
+  }
+  
+  .css-gear {
+    opacity: 0.2 !important;
+  }
+  
+  .steampunk-heading {
+    letter-spacing: 0.02em;
+  }
+  
+  .steampunk-button {
+    padding: 0.875rem 2rem;
+    font-size: 0.9rem;
+  }
 }

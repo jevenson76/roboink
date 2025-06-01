@@ -7,10 +7,9 @@ interface OrnamentalDividerProps {
 
 const OrnamentalDivider: React.FC<OrnamentalDividerProps> = ({ className = '', bgColor = 'bg-transparent' }) => {
   return (
-    <div className={`relative ${className}`}>
-      <div className="relative flex justify-center">
-        <div className={`${bgColor} px-4`}>
-          <svg
+    <div className={`flex items-center justify-center ${className}`}>
+      <div className={`${bgColor} px-4`}>
+        <svg
             width="60"
             height="60"
             viewBox="0 0 60 60"
@@ -59,7 +58,6 @@ const OrnamentalDivider: React.FC<OrnamentalDividerProps> = ({ className = '', b
               fill="none"
             />
           </svg>
-        </div>
       </div>
     </div>
   );

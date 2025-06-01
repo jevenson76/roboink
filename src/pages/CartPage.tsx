@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import NavbarPRD from '../components/NavbarPRD';
+import RobustNavbar from '../components/RobustNavbar';
 import FooterPRD from '../components/FooterPRD';
 import OrnamentalDivider from '../components/OrnamentalDivider';
 import { Trash2, Plus, Minus, ShoppingBag } from 'lucide-react';
@@ -33,7 +33,7 @@ const CartPage: React.FC = () => {
   if (cartItems.length === 0) {
     return (
       <div className="min-h-screen bg-[#efece9] animate-fade-in-from-top">
-        <NavbarPRD />
+        <RobustNavbar />
         <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-32 text-center">
           <ShoppingBag className="w-24 h-24 text-navy/30 mx-auto mb-6" />
           <h1 className="text-4xl font-slab font-bold text-navy drop-shadow-lg mb-4" style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.3)' }}>Your Cart is Empty</h1>
@@ -55,7 +55,7 @@ const CartPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-[#efece9] animate-fade-in-from-top">
-      <NavbarPRD />
+      <RobustNavbar />
       
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <h1 className="text-4xl font-slab font-bold text-navy drop-shadow-lg mb-8" style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.3)' }}>Shopping Cart</h1>

@@ -2,13 +2,23 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Cog, Zap, Clock, Palette } from 'lucide-react';
 
-const ValueSection: React.FC = () => {
+interface ValueSectionProps {
+  enableSteampunk?: boolean;
+}
+
+const ValueSection: React.FC<ValueSectionProps> = ({ enableSteampunk = false }) => {
   return (
     <div className="py-6 relative z-10" style={{ backgroundColor: 'rgba(245, 238, 211, 0.95)' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-burgundy mb-4">Why Choose RoboInkTees?</h2>
-          <p className="text-burgundy max-w-3xl mx-auto">
+          <h2 className={enableSteampunk
+            ? "steampunk-heading steampunk-heading-md text-center mb-4"
+            : "text-3xl font-bold text-burgundy mb-4"
+          }>Why Choose RoboInkTees?</h2>
+          <p className={enableSteampunk
+            ? "steampunk-subtitle text-center max-w-3xl mx-auto"
+            : "text-burgundy max-w-3xl mx-auto"
+          }>
             Our unique blend of Victorian aesthetics and cutting-edge AI technology creates wearable art that stands the test of time.
           </p>
         </div>

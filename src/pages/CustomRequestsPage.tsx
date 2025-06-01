@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import NavbarPRD from '../components/NavbarPRD';
+import RobustNavbar from '../components/RobustNavbar';
 import FooterPRD from '../components/FooterPRD';
 import OrnamentalDivider from '../components/OrnamentalDivider';
 
@@ -11,7 +11,7 @@ const CustomRequestsPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-[#efece9] animate-fade-in-from-top">
-      <NavbarPRD />
+      <RobustNavbar />
       
       {/* Hero Section */}
       <section className="relative py-24 bg-gradient-to-b from-navy/10 to-transparent">
@@ -19,7 +19,7 @@ const CustomRequestsPage: React.FC = () => {
           <h1 className="text-5xl md:text-6xl font-slab font-bold text-navy drop-shadow-lg mb-6" style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.3)' }}>
             Custom Design Requests
           </h1>
-          <p className="text-xl text-[#800020] font-slab font-bold leading-relaxed">
+          <p className="text-xl text-[#800020] font-body font-bold leading-relaxed">
             Bring your steampunk vision to life with our custom design service
           </p>
         </div>

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import NavbarPRD from '../components/NavbarPRD';
+import RobustNavbar from '../components/RobustNavbar';
 import FooterPRD from '../components/FooterPRD';
 import OrnamentalDivider from '../components/OrnamentalDivider';
 import { Truck, Globe, Clock, Package } from 'lucide-react';
@@ -41,12 +41,12 @@ const ShippingPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-[#efece9] animate-fade-in-from-top">
-      <NavbarPRD />
+      <RobustNavbar />
       
       {/* Hero Section */}
       <section className="bg-gradient-to-b from-navy/10 to-transparent py-12 text-center">
         <h1 className="text-5xl font-slab font-bold text-navy drop-shadow-lg mb-4" style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.3)' }}>Shipping Information</h1>
-        <p className="text-xl text-[#800020] font-slab font-bold max-w-2xl mx-auto">
+        <p className="text-xl text-[#800020] font-body font-bold max-w-2xl mx-auto">
           Fast, reliable shipping to steampunk enthusiasts worldwide
         </p>
       </section>
@@ -195,7 +195,10 @@ const ShippingPage: React.FC = () => {
               <strong>Questions about shipping?</strong>
             </p>
             <p className="text-navy/80">
-              Contact us at shipping@roboinktees.com
+              Contact us at{' '}
+              <a href="mailto:shipping@roboinktees.com" className="underline hover:text-[#B8860B]">
+                shipping@roboinktees.com
+              </a>
             </p>
           </div>
         </section>

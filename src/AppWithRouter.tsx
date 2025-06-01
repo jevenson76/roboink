@@ -15,6 +15,9 @@ import PrivacyPage from './pages/PrivacyPage';
 import TermsPage from './pages/TermsPage';
 import CarePage from './pages/CarePage';
 import CustomRequestsPage from './pages/CustomRequestsPage';
+import NewArrivalsPage from './pages/NewArrivalsPage';
+import SalePage from './pages/SalePage';
+import AccountPage from './pages/AccountPage';
 import ScrollToTop from './components/ScrollToTop';
 import { CartProvider } from './context/CartContext';
 import { FilterProvider } from './context/FilterContext';
@@ -41,6 +44,9 @@ function AppWithRouter() {
           <Route path="/terms" element={<TermsPage />} />
           <Route path="/care" element={<CarePage />} />
           <Route path="/custom-requests" element={<CustomRequestsPage />} />
+          <Route path="/new-arrivals" element={<NewArrivalsPage />} />
+          <Route path="/sale" element={<SalePage />} />
+          <Route path="/account" element={<AccountPage />} />
         </Routes>
         </FilterProvider>
       </CartProvider>

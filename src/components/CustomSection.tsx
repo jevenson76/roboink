@@ -1,7 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const CustomSection: React.FC = () => {
+interface CustomSectionProps {
+  enableSteampunk?: boolean;
+}
+
+const CustomSection: React.FC<CustomSectionProps> = ({ enableSteampunk = false }) => {
   return (
     <section className="py-6 bg-parchment">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -9,10 +13,16 @@ const CustomSection: React.FC = () => {
           <div className="flex flex-col md:flex-row items-center justify-between gap-8">
             {/* Left side - Content */}
             <div className="flex-1 text-center md:text-left">
-              <h2 className="text-3xl md:text-4xl font-slab font-bold text-navy mb-4" style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.3)' }}>
+              <h2 className={enableSteampunk
+                ? "steampunk-heading steampunk-heading-md mb-4"
+                : "text-3xl md:text-4xl font-slab font-bold text-navy mb-4"
+              } style={enableSteampunk ? {} : { textShadow: '2px 2px 4px rgba(0, 0, 0, 0.3)' }}>
                 Need Something Unique?
               </h2>
-              <p className="text-lg text-[#800020] font-slab font-bold mb-6 max-w-2xl">
+              <p className={enableSteampunk
+                ? "steampunk-subtitle mb-6 max-w-2xl"
+                : "text-lg text-[#800020] font-slab font-bold mb-6 max-w-2xl"
+              }>
                 Commission a one-of-a-kind steampunk design tailored to your vision
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">

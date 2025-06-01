@@ -29,7 +29,7 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({
 
   const [isOpen, setIsOpen] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
-  const [expandedSections, setExpandedSections] = useState(['product-types', 'categories']);
+  const [expandedSections, setExpandedSections] = useState<string[]>([]);
 
   // Calculate counts for each filter option
   const getCategoryCount = (categoryId: string) => {
@@ -136,33 +136,26 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({
                       const isSelected = selectedProductTypes.includes(item.id);
                       
                       return (
-                        <label
+                        <button
                           key={item.id}
-                          className={`flex items-center justify-between p-2 rounded cursor-pointer transition-all duration-200 ${
+                          onClick={() => toggleProductType(item.id)}
+                          className={`w-full flex items-center justify-between p-2 rounded-lg cursor-pointer transition-all duration-200 ${
                             isSelected 
-                              ? 'bg-navy text-parchment' 
-                              : 'hover:bg-[#B8860B]/10'
+                              ? 'bg-gradient-to-r from-[#B8860B] to-[#DAA520] text-white shadow-lg transform scale-105' 
+                              : 'bg-white border border-navy/20 hover:border-[#B8860B] hover:shadow-md'
                           }`}
                         >
-                          <div className="flex items-center space-x-2">
-                            <input
-                              type="checkbox"
-                              checked={isSelected}
-                              onChange={() => toggleProductType(item.id)}
-                              className="w-4 h-4 text-[#B8860B] rounded border-2 border-navy/30 focus:ring-[#B8860B] focus:ring-offset-0"
-                            />
-                            <span className={`text-sm ${isSelected ? 'text-parchment' : 'text-navy'}`}>
-                              {item.name}
-                            </span>
-                          </div>
-                          <span className={`text-xs px-2 py-1 rounded ${
+                          <span className={`text-sm font-medium ${isSelected ? 'text-white' : 'text-navy'}`}>
+                            {item.name}
+                          </span>
+                          <span className={`text-xs px-2 py-0.5 rounded-full ${
                             isSelected 
-                              ? 'bg-parchment/20 text-parchment' 
+                              ? 'bg-white/20 text-white' 
                               : 'bg-navy/10 text-navy/60'
                           }`}>
                             {count}
                           </span>
-                        </label>
+                        </button>
                       );
                     })}
                   </div>
@@ -196,33 +189,26 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({
               const isSelected = selectedCategories.includes(category.id);
               
               return (
-                <label
+                <button
                   key={category.id}
-                  className={`flex items-center justify-between p-2 rounded cursor-pointer transition-all duration-200 ${
+                  onClick={() => toggleCategory(category.id)}
+                  className={`w-full flex items-center justify-between p-2 rounded-lg cursor-pointer transition-all duration-200 ${
                     isSelected 
-                      ? 'bg-navy text-parchment' 
-                      : 'hover:bg-[#B8860B]/10'
+                      ? 'bg-gradient-to-r from-[#B8860B] to-[#DAA520] text-white shadow-lg transform scale-105' 
+                      : 'bg-white border border-navy/20 hover:border-[#B8860B] hover:shadow-md'
                   }`}
                 >
-                  <div className="flex items-center space-x-2">
-                    <input
-                      type="checkbox"
-                      checked={isSelected}
-                      onChange={() => toggleCategory(category.id)}
-                      className="w-4 h-4 text-[#B8860B] rounded border-2 border-navy/30 focus:ring-[#B8860B] focus:ring-offset-0"
-                    />
-                    <span className={`text-sm ${isSelected ? 'text-parchment' : 'text-navy'}`}>
-                      {category.name}
-                    </span>
-                  </div>
-                  <span className={`text-xs px-2 py-1 rounded ${
+                  <span className={`text-sm font-medium ${isSelected ? 'text-white' : 'text-navy'}`}>
+                    {category.name}
+                  </span>
+                  <span className={`text-xs px-2 py-0.5 rounded-full ${
                     isSelected 
-                      ? 'bg-parchment/20 text-parchment' 
+                      ? 'bg-white/20 text-white' 
                       : 'bg-navy/10 text-navy/60'
                   }`}>
                     {count}
                   </span>
-                </label>
+                </button>
               );
             })}
           </div>
@@ -257,7 +243,7 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({
   // Desktop View
   const desktopSidebar = (
     <aside className={`hidden lg:block transition-all duration-300 ${isOpen ? 'w-80' : 'w-16'} flex-shrink-0`}>
-      <div className="sticky top-28 bg-gradient-to-b from-[#f2d19e] to-[#f5e6d3] border-2 border-navy rounded-lg shadow-xl overflow-hidden">
+      <div className="bg-gradient-to-b from-[#f2d19e] to-[#f5e6d3] border-2 border-navy rounded-lg shadow-xl overflow-hidden">
         {/* Header */}
         <div className="bg-navy p-4 flex items-center justify-between">
           <h3 className={`text-xl font-slab font-bold text-parchment transition-opacity duration-300 ${isOpen ? 'opacity-100' : 'opacity-0'}`}>
@@ -280,14 +266,21 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({
         {/* Collapsed State */}
         {!isOpen && (
           <div className="p-4 flex flex-col items-center space-y-4">
-            <div className="relative">
-              <Filter className="w-6 h-6 text-navy" />
+            <button
+              onClick={() => setIsOpen(true)}
+              className="relative group hover:scale-110 transition-transform cursor-pointer"
+              aria-label="Expand filters"
+            >
+              <Filter className="w-6 h-6 text-navy group-hover:text-[#B8860B] transition-colors" />
               {activeFilterCount > 0 && (
                 <span className="absolute -top-2 -right-2 bg-[#B8860B] text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold">
                   {activeFilterCount}
                 </span>
               )}
-            </div>
+            </button>
+            <span className="text-xs text-navy/60 rotate-90 origin-center whitespace-nowrap mt-4">
+              Filters
+            </span>
           </div>
         )}
 

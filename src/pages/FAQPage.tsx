@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import NavbarPRD from '../components/NavbarPRD';
+import RobustNavbar from '../components/RobustNavbar';
 import FooterPRD from '../components/FooterPRD';
 import OrnamentalDivider from '../components/OrnamentalDivider';
-import { ChevronDown, ChevronUp } from 'lucide-react';
+import { ChevronDown, ChevronUp, Package, Heart, Truck, FileText, Shield, HelpCircle } from 'lucide-react';
 
 interface FAQItem {
   question: string;
@@ -118,14 +118,14 @@ const FAQPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-[#efece9] animate-fade-in-from-top">
-      <NavbarPRD />
+      <RobustNavbar />
       
       {/* Hero Section */}
       <section className="bg-gradient-to-b from-navy/10 to-transparent py-8 text-center">
         <h1 className="text-5xl font-slab font-bold text-navy drop-shadow-lg mb-4" style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.3)' }}>
           {selectedCategory === 'process' ? 'What Makes RoboInk Tees Different?' : 'Frequently Asked Questions'}
         </h1>
-        <p className="text-xl text-[#800020] font-slab font-bold max-w-3xl mx-auto mb-4">
+        <p className="text-xl text-[#800020] font-body font-bold max-w-3xl mx-auto mb-4">
           {selectedCategory === 'process' 
             ? 'Discover our revolutionary AI-driven approach to steampunk design and commerce'
             : 'Find answers to common questions about our products, shipping, and more'}
@@ -133,6 +133,54 @@ const FAQPage: React.FC = () => {
       </section>
 
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-0 pb-8">
+        {/* Quick Links to Customer Service Pages */}
+        <div className="mb-8 p-6 bg-white rounded-xl shadow-sm border border-gray-200">
+          <h2 className="text-xl font-slab text-navy mb-4">Quick Links</h2>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+            <Link
+              to="/shipping"
+              className="flex items-center gap-2 px-4 py-3 bg-gray-50 rounded-lg hover:bg-brass/10 hover:border-brass border border-transparent transition-all"
+            >
+              <Truck className="w-4 h-4 text-brass" />
+              <span className="text-sm font-medium text-navy">Shipping Info</span>
+            </Link>
+            <Link
+              to="/returns"
+              className="flex items-center gap-2 px-4 py-3 bg-gray-50 rounded-lg hover:bg-brass/10 hover:border-brass border border-transparent transition-all"
+            >
+              <Package className="w-4 h-4 text-brass" />
+              <span className="text-sm font-medium text-navy">Returns</span>
+            </Link>
+            <Link
+              to="/care"
+              className="flex items-center gap-2 px-4 py-3 bg-gray-50 rounded-lg hover:bg-brass/10 hover:border-brass border border-transparent transition-all"
+            >
+              <Heart className="w-4 h-4 text-brass" />
+              <span className="text-sm font-medium text-navy">Care Guide</span>
+            </Link>
+            <Link
+              to="/size-guide"
+              className="flex items-center gap-2 px-4 py-3 bg-gray-50 rounded-lg hover:bg-brass/10 hover:border-brass border border-transparent transition-all"
+            >
+              <FileText className="w-4 h-4 text-brass" />
+              <span className="text-sm font-medium text-navy">Size Guide</span>
+            </Link>
+            <Link
+              to="/privacy"
+              className="flex items-center gap-2 px-4 py-3 bg-gray-50 rounded-lg hover:bg-brass/10 hover:border-brass border border-transparent transition-all"
+            >
+              <Shield className="w-4 h-4 text-brass" />
+              <span className="text-sm font-medium text-navy">Privacy Policy</span>
+            </Link>
+            <Link
+              to="/contact"
+              className="flex items-center gap-2 px-4 py-3 bg-gray-50 rounded-lg hover:bg-brass/10 hover:border-brass border border-transparent transition-all"
+            >
+              <HelpCircle className="w-4 h-4 text-brass" />
+              <span className="text-sm font-medium text-navy">Contact Us</span>
+            </Link>
+          </div>
+        </div>
         {/* Category Filter */}
         <div className="flex justify-center gap-2 mb-8">
           {categories.map((category) => (
@@ -203,7 +251,7 @@ const FAQPage: React.FC = () => {
         </section>
       </main>
 
-      <OrnamentalDivider className="mb-12 mt-12" bgColor="bg-[#efece9]" />
+      <OrnamentalDivider className="mt-16 mb-12" bgColor="bg-[#efece9]" />
       <div className="h-1 bg-navy"></div>
       <FooterPRD />
     </div>

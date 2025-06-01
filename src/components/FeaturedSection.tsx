@@ -3,7 +3,11 @@ import { Link } from 'react-router-dom';
 import ProductCardPRD from './ProductCardPRD';
 import { products } from '../data/products';
 
-const FeaturedSection: React.FC = () => {
+interface FeaturedSectionProps {
+  enableSteampunk?: boolean;
+}
+
+const FeaturedSection: React.FC<FeaturedSectionProps> = ({ enableSteampunk = false }) => {
   // Get 3 apparel items (t-shirt, hoodie, beanie)
   const apparelProducts = [
     products.find(p => p.id === 1), // Victorian Clockwork Automaton - T-shirt
@@ -23,20 +27,30 @@ const FeaturedSection: React.FC = () => {
   const featuredProducts = [...apparelProducts, ...otherCategoryProducts];
 
   return (
-    <section className="py-6 bg-parchment">
+    <section id="featured-section" className="py-6 bg-parchment">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-4xl md:text-5xl font-slab font-bold text-navy text-center mb-4" style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.3)' }}>
+        <h2 className={enableSteampunk 
+          ? "steampunk-heading steampunk-heading-lg text-center mb-4"
+          : "text-4xl md:text-5xl font-slab font-bold text-navy text-center mb-4"
+        } style={enableSteampunk ? {} : { textShadow: '2px 2px 4px rgba(0, 0, 0, 0.3)' }}>
           Featured Designs
         </h2>
         
-        <p className="text-lg text-[#800020] font-slab font-bold text-center mb-12 max-w-3xl mx-auto">
+        <p className={enableSteampunk
+          ? "steampunk-subtitle text-center mb-12 max-w-3xl mx-auto"
+          : "text-lg text-[#800020] font-slab font-bold text-center mb-12 max-w-3xl mx-auto"
+        }>
           Discover our most popular steampunk creations, ready to wear
         </p>
 
         {/* Product Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {featuredProducts.map(product => product && (
-            <ProductCardPRD key={product.id} {...product} />
+            <ProductCardPRD 
+              key={product.id} 
+              {...product} 
+              isNew={product.id >= 25} // Mark products with ID 25 and above as new
+            />
           ))}
         </div>
 

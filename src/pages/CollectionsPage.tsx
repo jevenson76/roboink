@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import NavbarPRD from '../components/NavbarPRD';
+import RobustNavbar from '../components/RobustNavbar';
 import FooterPRD from '../components/FooterPRD';
 import ProductCardPRD from '../components/ProductCardPRD';
 import OrnamentalDivider from '../components/OrnamentalDivider';
-import FilterSidebar from '../components/FilterSidebar';
+import ModernFilterSidebar from '../components/ModernFilterSidebar';
 import { useFilter } from '../context/FilterContext';
 import { products } from '../data/products';
-import { categories } from '../data/categories';
 import { productTypes } from '../data/productTypes';
-import { Filter } from 'lucide-react';
+import { Filter, X, RotateCcw } from 'lucide-react';
 
 const CollectionsPage: React.FC = () => {
   useEffect(() => {
@@ -98,7 +97,7 @@ const CollectionsPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-[#efece9] animate-fade-in-from-top">
-      <NavbarPRD />
+      <RobustNavbar />
       
       {/* Hero Section */}
       <section className="bg-[#efece9] py-8 text-center relative">
@@ -107,7 +106,7 @@ const CollectionsPage: React.FC = () => {
            typeFromUrl && productTypes[typeFromUrl] ? `${productTypes[typeFromUrl].name} Collection` :
            'RoboInk Handmade Items'}
         </h1>
-        <p className="text-xl text-[#800020] font-slab font-bold max-w-3xl mx-auto">
+        <p className="text-lg sm:text-xl text-[#800020] font-body font-bold max-w-3xl mx-auto px-4 truncate">
           {searchQuery ? 
             `Found ${filteredProducts.length} items matching your search` :
             typeFromUrl && productTypes[typeFromUrl] ? 
@@ -131,7 +130,7 @@ const CollectionsPage: React.FC = () => {
       </button>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex gap-8">
-        <FilterSidebar 
+        <ModernFilterSidebar 
           totalProducts={filteredProducts.length}
           isMobileOpen={isMobileFilterOpen}
           onMobileClose={() => setIsMobileFilterOpen(false)}
@@ -163,19 +162,20 @@ const CollectionsPage: React.FC = () => {
             </div>
           </div>
 
-          {/* Active Filters */}
+          {/* Active Filters - Professional Design */}
           {(selectedCategories.length > 0 || selectedProductTypes.length > 0) && (
-            <div className="mb-6 p-4 bg-[#f2d19e] border-2 border-navy rounded-lg">
+            <div className="mb-6">
               <div className="flex flex-wrap items-center gap-2">
-                <span className="text-navy font-slab font-semibold">Active filters:</span>
                 {selectedCategories.map(cat => (
                   <button
                     key={cat}
                     onClick={() => setSelectedCategories(selectedCategories.filter(c => c !== cat))}
-                    className="px-4 py-1 bg-navy text-parchment rounded-full text-sm flex items-center hover:bg-navy/80 transition-colors"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-navy/10 border border-navy/20 rounded-full text-sm hover:bg-navy/20 transition-colors"
                   >
-                    {cat.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
-                    <span className="ml-2">×</span>
+                    <span className="text-navy font-medium">
+                      {cat.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
+                    </span>
+                    <X className="w-3.5 h-3.5 text-navy/60" />
                   </button>
                 ))}
                 {selectedProductTypes.map(type => {
@@ -184,10 +184,10 @@ const CollectionsPage: React.FC = () => {
                     <button
                       key={type}
                       onClick={() => setSelectedProductTypes(selectedProductTypes.filter(t => t !== type))}
-                      className="px-4 py-1 bg-navy text-parchment rounded-full text-sm flex items-center hover:bg-navy/80 transition-colors"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-navy/10 border border-navy/20 rounded-full text-sm hover:bg-navy/20 transition-colors"
                     >
-                      {productType.name}
-                      <span className="ml-2">×</span>
+                      <span className="text-navy font-medium">{productType.name}</span>
+                      <X className="w-3.5 h-3.5 text-navy/60" />
                     </button>
                   ) : null;
                 })}
@@ -196,8 +196,9 @@ const CollectionsPage: React.FC = () => {
                     setSelectedCategories([]);
                     setSelectedProductTypes([]);
                   }}
-                  className="text-[#800020] hover:text-[#800020]/80 text-sm underline font-semibold ml-2"
+                  className="inline-flex items-center gap-1 text-brass hover:text-copper text-sm font-medium transition-colors"
                 >
+                  <RotateCcw className="w-3.5 h-3.5" />
                   Clear all
                 </button>
               </div>

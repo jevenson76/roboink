@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import NavbarPRD from '../components/NavbarPRD';
+import { useParams } from 'react-router-dom';
+import RobustNavbar from '../components/RobustNavbar';
 import FooterPRD from '../components/FooterPRD';
 import ProductCardPRD from '../components/ProductCardPRD';
 import OrnamentalDivider from '../components/OrnamentalDivider';
-import FilterSidebar from '../components/FilterSidebar';
+import ModernFilterSidebar from '../components/ModernFilterSidebar';
 import { useFilter } from '../context/FilterContext';
 import { products } from '../data/products';
 import { productTypes } from '../data/productTypes';
-import { ChevronRight, Home } from 'lucide-react';
+import { Filter, X } from 'lucide-react';
 
 interface CategoryMapping {
   [key: string]: {
@@ -28,11 +28,18 @@ const categoryMapping: CategoryMapping = {
 
 const CollectionCategoryPage: React.FC = () => {
   const { category } = useParams<{ category: string }>();
-  const { selectedProductTypes, sortBy, setSortBy } = useFilter();
+  const { selectedProductTypes, sortBy, setSortBy, setSelectedProductTypes } = useFilter();
+  const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  // CLEAR FILTERS ON MOUNT - Don't auto-select anything
+  useEffect(() => {
+    // Clear all filters when navigating to a product type page
+    setSelectedProductTypes([]);
+  }, [category, setSelectedProductTypes]);
 
   if (!category || !categoryMapping[category]) {
     return <div>Category not found</div>;
@@ -49,7 +56,8 @@ const CollectionCategoryPage: React.FC = () => {
     categoryProductTypeIds.includes(p.productType) && p.id !== 999
   );
   
-  // Apply selected product type filters
+  // Apply selected product type filters ONLY if some are selected
+  // If none are selected, show all products in the category
   if (selectedProductTypes.length > 0) {
     filteredProducts = filteredProducts.filter(p => 
       selectedProductTypes.includes(p.productType)
@@ -76,24 +84,75 @@ const CollectionCategoryPage: React.FC = () => {
       });
   }
 
+  const activeFilterCount = selectedProductTypes.filter(type => 
+    categoryProductTypeIds.includes(type)
+  ).length;
+
   return (
     <div className="min-h-screen bg-[#efece9] animate-fade-in-from-top">
-      <NavbarPRD />
+      <RobustNavbar />
       
       {/* Hero Section */}
       <section className="bg-[#efece9] py-8 text-center">
         <h1 className="text-5xl font-slab font-bold text-navy mb-2 drop-shadow-lg" style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.3)' }}>
           RoboInk Handmade {categoryInfo.name}
         </h1>
-        <p className="text-xl text-[#800020] font-slab font-bold max-w-3xl mx-auto">
-          Explore our collection of handcrafted {categoryInfo.name.toLowerCase()}
+        <p className="text-lg sm:text-xl text-[#800020] font-body font-bold max-w-3xl mx-auto px-4 truncate">
+          Premium Quality • Hand-Printed Designs • Made with Love
         </p>
       </section>
 
+      {/* Mobile Filter Button */}
+      <button
+        onClick={() => setIsMobileFilterOpen(true)}
+        className="lg:hidden fixed bottom-6 right-6 z-40 bg-gradient-to-r from-[#B8860B] to-[#DAA520] text-white p-4 rounded-full shadow-lg flex items-center space-x-2 hover:scale-110 transition-transform"
+      >
+        <Filter className="w-5 h-5" />
+        {activeFilterCount > 0 && (
+          <span className="bg-white text-[#B8860B] rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold">
+            {activeFilterCount}
+          </span>
+        )}
+      </button>
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex gap-8">
-        <FilterSidebar />
+        {/* ADD FILTER SIDEBAR HERE */}
+        <ModernFilterSidebar 
+          totalProducts={filteredProducts.length}
+          isMobileOpen={isMobileFilterOpen}
+          onMobileClose={() => setIsMobileFilterOpen(false)}
+        />
         
         <main className="flex-1">
+          {/* Active Filters - Professional Design */}
+          {selectedProductTypes.length > 0 && (
+            <div className="mb-6">
+              <div className="flex flex-wrap items-center gap-2">
+                {selectedProductTypes
+                  .filter(type => categoryProductTypeIds.includes(type))
+                  .map(type => {
+                    const productType = categoryProductTypes.items.find(item => item.id === type);
+                    return productType ? (
+                      <button
+                        key={type}
+                        onClick={() => setSelectedProductTypes(selectedProductTypes.filter(t => t !== type))}
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-navy/10 border border-navy/20 rounded-full text-sm hover:bg-navy/20 transition-colors"
+                      >
+                        <span className="text-navy font-medium">{productType.name}</span>
+                        <X className="w-3.5 h-3.5 text-navy/60" />
+                      </button>
+                    ) : null;
+                  })}
+                <button
+                  onClick={() => setSelectedProductTypes([])}
+                  className="text-brass hover:text-copper text-sm font-medium ml-2"
+                >
+                  Clear all
+                </button>
+              </div>
+            </div>
+          )}
+
           {/* Sort Bar */}
           <div className="flex flex-wrap items-center justify-between mb-8 pb-6 border-b border-navy/20">
             <p className="text-navy/60 font-semibold">

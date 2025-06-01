@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import NavbarPRD from '../components/NavbarPRD';
+import RobustNavbar from '../components/RobustNavbar';
 import FooterPRD from '../components/FooterPRD';
 import OrnamentalDivider from '../components/OrnamentalDivider';
 
@@ -10,12 +10,12 @@ const PrivacyPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-[#efece9] animate-fade-in-from-top">
-      <NavbarPRD />
+      <RobustNavbar />
       
       {/* Hero Section */}
       <section className="bg-gradient-to-b from-navy/10 to-transparent py-12 text-center">
         <h1 className="text-5xl font-slab font-bold text-navy drop-shadow-lg mb-4" style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.3)' }}>Privacy Policy</h1>
-        <p className="text-xl text-[#800020] font-slab font-bold max-w-2xl mx-auto">
+        <p className="text-xl text-[#800020] font-body font-bold max-w-2xl mx-auto">
           Your privacy is important to us. Last updated: {new Date().toLocaleDateString()}
         </p>
       </section>
@@ -153,7 +153,11 @@ const PrivacyPage: React.FC = () => {
               If you have questions about this Privacy Policy or our privacy practices, please contact us:
             </p>
             <div className="space-y-2 text-navy">
-              <p><strong>Email:</strong> privacy@roboinktees.com</p>
+              <p>
+                <strong>Email:</strong>{' '}
+                <a href="mailto:privacy@roboinktees.com" className="underline hover:text-[#B8860B]">
+                  privacy@roboinktees.com
+                </a></p>
             </div>
           </section>
         </div>

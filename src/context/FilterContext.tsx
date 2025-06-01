@@ -13,6 +13,7 @@ interface FilterContextType {
   toggleCategory: (categoryId: string) => void;
   toggleProductType: (typeId: string) => void;
   toggleProductTypeExpansion: (key: string) => void;
+  clearAllFilters: () => void;
 }
 
 const FilterContext = createContext<FilterContextType | undefined>(undefined);
@@ -38,17 +39,22 @@ export const FilterProvider: React.FC<{ children: ReactNode }> = ({ children }) 
 
   // Update URL when filters change
   useEffect(() => {
-    const params = new URLSearchParams();
-    
-    selectedCategories.forEach(category => {
-      params.append('category', category);
-    });
-    
-    selectedProductTypes.forEach(type => {
-      params.append('type', type);
-    });
-    
-    navigate(`${location.pathname}?${params.toString()}`, { replace: true });
+    if (location.pathname.includes('/collections')) {
+      const params = new URLSearchParams();
+      
+      selectedCategories.forEach(category => {
+        params.append('category', category);
+      });
+      
+      selectedProductTypes.forEach(type => {
+        params.append('type', type);
+      });
+      
+      const queryString = params.toString();
+      const newUrl = queryString ? `${location.pathname}?${queryString}` : location.pathname;
+      
+      navigate(newUrl, { replace: true });
+    }
   }, [selectedCategories, selectedProductTypes, navigate, location.pathname]);
 
   const toggleCategory = (categoryId: string) => {
@@ -75,6 +81,11 @@ export const FilterProvider: React.FC<{ children: ReactNode }> = ({ children }) 
     );
   };
 
+  const clearAllFilters = () => {
+    setSelectedCategories([]);
+    setSelectedProductTypes([]);
+  };
+
   return (
     <FilterContext.Provider
       value={{
@@ -89,6 +100,7 @@ export const FilterProvider: React.FC<{ children: ReactNode }> = ({ children }) 
         toggleCategory,
         toggleProductType,
         toggleProductTypeExpansion,
+        clearAllFilters,
       }}
     >
       {children}

@@ -26,15 +26,25 @@ const categoryImages: { [key: string]: string } = {
   'custom-requests': customImg
 };
 
-const CollectionsSection: React.FC = () => {
+interface CollectionsSectionProps {
+  enableSteampunk?: boolean;
+}
+
+const CollectionsSection: React.FC<CollectionsSectionProps> = ({ enableSteampunk = false }) => {
   return (
     <section className="py-6 bg-parchment">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-4xl md:text-5xl font-slab font-bold text-navy text-center mb-2" style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.3)' }}>
+        <h2 className={enableSteampunk
+          ? "steampunk-heading steampunk-heading-lg text-center mb-4"
+          : "text-4xl md:text-5xl font-slab font-bold text-navy text-center mb-2"
+        } style={enableSteampunk ? {} : { textShadow: '2px 2px 4px rgba(0, 0, 0, 0.3)' }}>
           Our Collections
         </h2>
         
-        <p className="text-lg text-[#800020] font-slab font-bold text-center mb-8 max-w-3xl mx-auto">
+        <p className={enableSteampunk
+          ? "steampunk-subtitle text-center mb-8 max-w-3xl mx-auto"
+          : "text-lg text-[#800020] font-slab font-bold text-center mb-8 max-w-3xl mx-auto"
+        }>
           Explore our curated selection of steampunk-inspired designs
         </p>
 

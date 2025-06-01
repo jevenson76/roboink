@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import NavbarPRD from '../components/NavbarPRD';
+import RobustNavbar from '../components/RobustNavbar';
 import FooterPRD from '../components/FooterPRD';
 import OrnamentalDivider from '../components/OrnamentalDivider';
 import { Mail, Clock, Send } from 'lucide-react';
@@ -35,12 +35,12 @@ const ContactPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-[#efece9] animate-fade-in-from-top">
-      <NavbarPRD />
+      <RobustNavbar />
       
       {/* Hero Section */}
       <section className="bg-gradient-to-b from-navy/10 to-transparent py-8 text-center">
         <h1 className="text-5xl font-slab font-bold text-navy drop-shadow-lg mb-4" style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.3)' }}>Get in Touch</h1>
-        <p className="text-xl text-[#800020] font-slab font-bold max-w-2xl mx-auto">
+        <p className="text-xl text-[#800020] font-body font-bold max-w-2xl mx-auto">
           We'd love to hear from you about your steampunk dreams
         </p>
       </section>

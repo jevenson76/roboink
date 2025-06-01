@@ -1,0 +1,44 @@
+/* Navbar Text Alignment Fix */
+/* Add this to your index.css or create a specific CSS module */
+
+/* Method 1: Direct targeting of nav links */
+.navbar-text-link {
+  position: relative;
+  top: 9px; /* Drops the text down 9px */
+  /* This maintains the clickable area while shifting visual position */
+}
+
+/* Method 2: If you want to target all text links in the navbar without modifying JSX */
+nav a[href]:not(.icon-link) {
+  position: relative;
+  transform: translateY(9px);
+  /* Using transform is better for performance than position adjustments */
+}
+
+/* Method 3: Most precise - target specific navbar links */
+.nav-text-featured,
+.nav-text-product-types,
+.nav-text-collections,
+.nav-text-faq,
+.nav-text-contact {
+  display: inline-block; /* Ensures transform works properly */
+  transform: translateY(9px);
+  /* Maintains the hover underline at the new position */
+}
+
+/* Ensure dropdown triggers maintain proper alignment */
+.nav-dropdown-trigger {
+  transform: translateY(9px);
+}
+
+/* Keep the chevron aligned with the text */
+.nav-dropdown-trigger svg {
+  vertical-align: middle;
+  /* The chevron will move with the text */
+}
+
+/* Alternative approach using padding if you prefer */
+.navbar-padded-text {
+  padding-top: 9px;
+  /* This increases the clickable area though, which may not be desired */
+}
